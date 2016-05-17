@@ -10,10 +10,10 @@
     <package name="default" extends="struts-default">
 		<default-interceptor-ref name="paramsPrepareParamsStack"/>
    		
-   		<action name="buscarAlquileres" class="actions.ClienteAlquileres">
-            <result  name="input">index.jsp</result>
-			<result  name="error">index.jsp</result>
-			<result>prueba.jsp</result>
+   		<action name="buscarAlquileres" class="actions.BuscarAlquileres">
+            <result  name="input">/jsp/index.jsp</result>
+			<result  name="error">/jsp/index.jsp</result>
+			<result>/jsp/alquileresCliente.jsp</result>
         </action>
    		
     </package>

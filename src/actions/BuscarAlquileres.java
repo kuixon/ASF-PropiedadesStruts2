@@ -7,7 +7,7 @@ import entities.CustomAlquiler;
 import entities.CustomCliente;
 import utilities.ClientManager;
 
-public class ClienteAlquileres extends ActionSupport {
+public class BuscarAlquileres extends ActionSupport {
 	
 	private String dniCliente = null;
 	private ArrayList<CustomAlquiler> listaAlquileres = null;
