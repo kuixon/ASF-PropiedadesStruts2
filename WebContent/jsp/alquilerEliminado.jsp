@@ -13,17 +13,10 @@
 		<div class="titleDiv">
 			<h1>Centro de llamadas - Propiedades</h1>
 		</div>
-		<h2>Identificaci&oacute;n del cliente</h2>
+		<h2>El alquiler con id <s:property value="idAlquiler" /> ha sido eliminado correctamente</h2>
 		<s:form action="buscarAlquileres" method="POST">
-			<s:textfield name="dniCliente" label="%{getText('label.index.cliente')}"/>
-			<div class="errorSection">
-				<tr>
-					<td class="error" colspan="2">
-						<s:actionerror />
-					</td>
-				</tr>
-			</div>
-		    <s:submit value="%{getText('action.buscar')}"/>
-		</s:form>	
+          	<s:hidden name="dniCliente" value="%{dniCliente}" />
+		    <s:submit value="%{getText('action.volver')}"/>
+		</s:form>
 	</body>
 </html>

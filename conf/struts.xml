@@ -15,7 +15,13 @@
 			<result  name="error">/jsp/index.jsp</result>
 			<result>/jsp/alquileresCliente.jsp</result>
         </action>
-   		
+        <action name="eliminarAlquiler" class="actions.EliminarAlquiler">
+			<result>/jsp/alquilerEliminado.jsp</result>
+        </action>
+        <action name="formularioAlquiler" class="actions.FormularioAlquiler">
+			<result>/jsp/index.jsp</result>
+        </action>
+        
     </package>
 
 </struts>
