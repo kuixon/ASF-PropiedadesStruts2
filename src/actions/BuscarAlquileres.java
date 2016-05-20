@@ -13,27 +13,11 @@ public class BuscarAlquileres extends ActionSupport {
 	private ArrayList<CustomAlquiler> listaAlquileres = null;
 	
 	public String execute() throws Exception {
-		if (getTxtCliente() == null || getTxtCliente().equals("")) {
-			addActionError(getText("errors.requerido.dniCliente"));
-			return INPUT;
-		} else if (!dniValidation(getTxtCliente())) {
-			addActionError(getText("errors.formato.incorrecto.dniCliente"));
-            return ERROR;
+		if (validation()) {
+			setListaAlquileres(ClientManager.getInstance().getAlquileresByDniCliente(Integer.parseInt(getTxtCliente())));
+			return SUCCESS;
 		} else {
-			ArrayList<CustomCliente> clientes = ClientManager.getInstance().getAllClientes();
-			boolean enc = false;
-			for (CustomCliente cc : clientes) {
-				if (cc.getDni() == Integer.parseInt(getTxtCliente())) {
-					enc = true;
-				}
-			}
-			if (enc) {
-				setListaAlquileres(ClientManager.getInstance().getAlquileresByDniCliente(Integer.parseInt(getTxtCliente())));
-				return SUCCESS;
-			} else {
-				addActionError(getText("errors.inexistente.dniCliente"));
-	            return ERROR;
-			}
+			return ERROR;
 		}
 	}
 
@@ -64,5 +48,34 @@ public class BuscarAlquileres extends ActionSupport {
 			return false;
 		}
 		return true;
+	}
+	
+	private boolean validation() {
+		if (getTxtCliente() == null || getTxtCliente().equals("")) {
+			addActionError(getText("errors.requerido.dniCliente"));
+		} else {
+			if (!dniValidation(getTxtCliente())) {
+				addActionError(getText("errors.formato.incorrecto.dniCliente"));
+			}
+			
+			boolean enc = false;
+			if (getTxtCliente() != null && !getTxtCliente().equals("") && dniValidation(getTxtCliente())) {
+				ArrayList<CustomCliente> clientes = ClientManager.getInstance().getAllClientes();
+				for (CustomCliente cc : clientes) {
+					if (cc.getDni() == Integer.parseInt(getTxtCliente())) {
+						enc = true;
+					}
+				}
+				if (!enc) {
+					addActionError(getText("errors.inexistente.dniCliente"));
+				}
+			}
+			
+			if (getTxtCliente() != null && !getTxtCliente().equals("") && dniValidation(getTxtCliente())
+					&& enc) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

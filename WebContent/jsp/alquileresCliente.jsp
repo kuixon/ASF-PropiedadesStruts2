@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<title><s:text name="application.title"/></title>
+		<title><s:text name="application.gestion.alquileres.title"/></title>
 		<link rel="icon" type="image/png" href="<s:url value="/img/icon.png"/>" />
 		<link type="text/css" rel="stylesheet" href="<s:url value="/css/app.css"/>" />
 	</head>
@@ -62,9 +62,9 @@
            		<s:hidden name="accion" value="add" />
            		<s:hidden name="idAlquiler" value="%{idAlquiler}" />
            		<s:hidden name="txtCliente" value="%{txtCliente}"/>
-			    <s:submit value="%{getText('action.añadir')}"/>
+			    <s:submit value="%{getText('action.addAlquiler')}"/>
 			</s:form>
-			<s:form action="/jsp/index.jsp">
+			<s:form action="/jsp/gestionAlquileres.jsp">
 			    <s:submit value="%{getText('action.volver')}"/>
 			</s:form>
 		</div>

@@ -45,50 +45,36 @@ public class AccionFormularioAlquiler extends ActionSupport  {
 			actividades.add(ca.getNombre());
 		}
 		
-		if (!getTxtCliente().equals("") && !getTxtPropiedad().equals("") && !getTxtActividad().equals("")
-				&& !getTxtFechaInicio().equals("") && !getTxtFechaFin().equals("") && !getTxtPrecio().equals("")) {
-			
-			if (isDateFormat(getTxtFechaInicio()) != null && 
-					isDateFormat(getTxtFechaFin()) != null) {
-				if (isNumber(getTxtPrecio())) {
-					// Inicialización
-					setCc(ClientManager.getInstance().getClienteById(Integer.parseInt(getTxtCliente()))); 
-					for (CustomPropiedad customPropiedad : ClientManager.getInstance().getAllPropiedades()) {
-						if (customPropiedad.getNombre().equals(getTxtPropiedad())) {
-							setCp(customPropiedad);
-						}
-					}
-					for (CustomActividad customActividad : ClientManager.getInstance().getAllActividades()) {
-						if (customActividad.getNombre().equals(getTxtActividad())) {
-							setCa(customActividad);
-						}
-					}
-					
-					CustomAlquiler customAlquiler = new CustomAlquiler();
-					customAlquiler.setCliente(getCc());
-					customAlquiler.setPropiedad(getCp());
-					customAlquiler.setActividad(getCa());
-					customAlquiler.setFecha_inicio(isDateFormat(getTxtFechaInicio()));
-					customAlquiler.setFecha_fin(isDateFormat(getTxtFechaFin()));
-					customAlquiler.setPrecio(Double.parseDouble(getTxtPrecio()));
-					if (getAccion().equals("add")) {
-						ClientManager.getInstance().saveAlquiler(customAlquiler);
-					} else {
-						customAlquiler.setIdAlquiler(Integer.parseInt(getIdAlquiler()));
-						ClientManager.getInstance().editAlquiler(customAlquiler);
-					}
-					return SUCCESS;
-				} else {
-					addActionError(getText("errors.formulario.alquiler.formatoPrecio"));
-		            return ERROR;
+		if (validation()) {
+			// Inicialización
+			setCc(ClientManager.getInstance().getClienteById(Integer.parseInt(getTxtCliente()))); 
+			for (CustomPropiedad customPropiedad : ClientManager.getInstance().getAllPropiedades()) {
+				if (customPropiedad.getNombre().equals(getTxtPropiedad())) {
+					setCp(customPropiedad);
 				}
-			} else {
-				addActionError(getText("errors.formulario.alquiler.formatoFechas"));
-	            return ERROR;
 			}
+			for (CustomActividad customActividad : ClientManager.getInstance().getAllActividades()) {
+				if (customActividad.getNombre().equals(getTxtActividad())) {
+					setCa(customActividad);
+				}
+			}
+			
+			CustomAlquiler customAlquiler = new CustomAlquiler();
+			customAlquiler.setCliente(getCc());
+			customAlquiler.setPropiedad(getCp());
+			customAlquiler.setActividad(getCa());
+			customAlquiler.setFecha_inicio(isDateFormat(getTxtFechaInicio()));
+			customAlquiler.setFecha_fin(isDateFormat(getTxtFechaFin()));
+			customAlquiler.setPrecio(Double.parseDouble(getTxtPrecio()));
+			if (getAccion().equals("add")) {
+				ClientManager.getInstance().saveAlquiler(customAlquiler);
+			} else {
+				customAlquiler.setIdAlquiler(Integer.parseInt(getIdAlquiler()));
+				ClientManager.getInstance().editAlquiler(customAlquiler);
+			}
+			return SUCCESS;
 		} else {
-			addActionError(getText("errors.formulario.alquiler.requeridos"));
-            return ERROR;
+			return ERROR;
 		}
 	}
 
@@ -212,6 +198,31 @@ public class AccionFormularioAlquiler extends ActionSupport  {
 			return d;
 		} catch (Exception e) {
 			return null;
+		}
+	}
+	
+	private boolean validation() {
+		if (getTxtCliente().equals("") || getTxtPropiedad().equals("") || getTxtActividad().equals("")
+				|| getTxtFechaInicio().equals("") || getTxtFechaFin().equals("") || getTxtPrecio().equals("")) {
+			addActionError(getText("errors.formulario.alquiler.requeridos"));
+		} else {
+			if (isDateFormat(getTxtFechaInicio()) == null || 
+					isDateFormat(getTxtFechaFin()) == null) {
+				addActionError(getText("errors.formulario.alquiler.formatoFechas"));
+			}
+			
+			if (!isNumber(getTxtPrecio())) {
+				addActionError(getText("errors.formulario.alquiler.formatoPrecio"));
+			}
+		}
+		
+		if (!getTxtCliente().equals("") && !getTxtPropiedad().equals("") && !getTxtActividad().equals("")
+				&& !getTxtFechaInicio().equals("") && !getTxtFechaFin().equals("") && !getTxtPrecio().equals("")
+				&& isDateFormat(getTxtFechaInicio()) != null && isDateFormat(getTxtFechaFin()) != null
+				&& isNumber(getTxtPrecio())) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

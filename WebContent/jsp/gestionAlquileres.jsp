@@ -13,18 +13,20 @@
 		<div class="titleDiv">
 			<h1>Centro de llamadas - Propiedades</h1>
 		</div>
-		<s:if test="accion == \"add\"">
-			<h2>El alquiler ha sido añadido correctamente</h2>
-		</s:if>
-		<s:elseif test="accion == \"eliminar\"">
-		    <h2>El alquiler con id <s:property value="%{idAlquiler}" /> ha sido eliminado correctamente</h2>
-		</s:elseif>
-		<s:elseif test="accion == \"editar\"">
-		    <h2>El alquiler con id <s:property value="%{idAlquiler}" /> ha sido editado correctamente</h2>
-		</s:elseif>
+		<h2>Buscar alquileres por DNI</h2>
 		<s:form action="buscarAlquileres" method="POST">
-          	<s:hidden name="txtCliente" value="%{txtCliente}" />
-		    <s:submit value="%{getText('action.volver')}"/>
+			<s:textfield name="txtCliente" label="%{getText('label.index.cliente')}"/>
+			<div class="errorSection">
+				<tr>
+					<td class="error" colspan="2">
+						<s:actionerror />
+					</td>
+				</tr>
+			</div>
+		    <s:submit value="%{getText('action.buscar')}"/>
 		</s:form>
+		<s:form action="/jsp/index.jsp">
+		    <s:submit value="%{getText('action.volver')}"/>
+		</s:form>	
 	</body>
 </html>

@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<title><s:text name="application.gestion.alquileres.title"/></title>
+		<title><s:text name="application.gestion.clientes.title"/></title>
 		<link rel="icon" type="image/png" href="<s:url value="/img/icon.png"/>" />
 		<link type="text/css" rel="stylesheet" href="<s:url value="/css/app.css"/>" />
 	</head>
@@ -14,16 +14,15 @@
 			<h1>Centro de llamadas - Propiedades</h1>
 		</div>
 		<s:if test="accion == \"add\"">
-			<h2>El alquiler ha sido añadido correctamente</h2>
+			<h2>El cliente con dni <s:property value="%{dni}" /> ha sido añadido correctamente</h2>
 		</s:if>
 		<s:elseif test="accion == \"eliminar\"">
-		    <h2>El alquiler con id <s:property value="%{idAlquiler}" /> ha sido eliminado correctamente</h2>
+		    <h2>El cliente con dni <s:property value="%{dni}" /> ha sido eliminado correctamente</h2>
 		</s:elseif>
 		<s:elseif test="accion == \"editar\"">
-		    <h2>El alquiler con id <s:property value="%{idAlquiler}" /> ha sido editado correctamente</h2>
+		    <h2>El cliente con dni <s:property value="%{dni}" /> ha sido editado correctamente</h2>
 		</s:elseif>
-		<s:form action="buscarAlquileres" method="POST">
-          	<s:hidden name="txtCliente" value="%{txtCliente}" />
+		<s:form action="gestionClientes" method="POST">
 		    <s:submit value="%{getText('action.volver')}"/>
 		</s:form>
 	</body>

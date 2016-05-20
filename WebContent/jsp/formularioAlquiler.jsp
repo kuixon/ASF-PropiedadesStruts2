@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<title><s:text name="application.title"/></title>
+		<title><s:text name="application.gestion.alquileres.title"/></title>
 		<link rel="icon" type="image/png" href="<s:url value="/img/icon.png"/>" />
 		<link type="text/css" rel="stylesheet" href="<s:url value="/css/app.css"/>" />
 	</head>
@@ -41,7 +41,7 @@
 					</td>
 				</tr>
 			</div>
-	    	<s:submit value="%{getText('action.formulario.alquiler')}"/>
+	    	<s:submit value="%{getText('action.guardar')}"/>
 		</s:form>
 		<div>&nbsp;</div>
 		<s:form action="buscarAlquileres" method="POST">

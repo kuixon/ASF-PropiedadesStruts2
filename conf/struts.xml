@@ -11,8 +11,7 @@
 		<default-interceptor-ref name="paramsPrepareParamsStack"/>
    		
    		<action name="buscarAlquileres" class="actions.BuscarAlquileres">
-            <result  name="input">/jsp/index.jsp</result>
-			<result  name="error">/jsp/index.jsp</result>
+			<result  name="error">/jsp/gestionAlquileres.jsp</result>
 			<result>/jsp/alquileresCliente.jsp</result>
         </action>
         <action name="eliminarAlquiler" class="actions.EliminarAlquiler">
@@ -24,6 +23,20 @@
         <action name="accionFormularioAlquiler" class="actions.AccionFormularioAlquiler">
 			<result  name="error">/jsp/formularioAlquiler.jsp</result>
 			<result>/jsp/resultadoAccionAlquiler.jsp</result>
+        </action>
+        
+        <action name="gestionClientes" class="actions.GestionClientes">
+			<result>/jsp/gestionClientes.jsp</result>
+        </action>
+        <action name="eliminarCliente" class="actions.EliminarCliente">
+			<result>/jsp/resultadoAccionCliente.jsp</result>
+        </action>
+        <action name="formularioCliente" class="actions.FormularioCliente">
+			<result>/jsp/formularioCliente.jsp</result>
+        </action>
+        <action name="accionFormularioCliente" class="actions.AccionFormularioCliente">
+			<result  name="error">/jsp/formularioCliente.jsp</result>
+			<result>/jsp/resultadoAccionCliente.jsp</result>
         </action>
         
     </package>
