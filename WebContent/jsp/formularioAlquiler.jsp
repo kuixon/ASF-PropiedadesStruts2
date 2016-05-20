@@ -13,27 +13,26 @@
 		<div class="titleDiv">
 			<h1>Centro de llamadas - Propiedades</h1>
 		</div>
-		<h2>Formulario alquiler</h2>
-		<h3>Accion: <s:property value="accion" /></h3>		
+		<h2>Formulario alquiler</h2>		
 		<s:form action="accionFormularioAlquiler" method="POST">
 			<s:hidden name="accion" value="%{accion}" />
 			<s:hidden name="idAlquiler" value="%{idAlquiler}" />
-			<s:hidden name="dniCliente" value="%{txtCliente}" />
+			<s:hidden name="txtCliente" value="%{txtCliente}" />
 			<s:select label="%{getText('label.formulario.alquiler.propiedad')}" 
 				headerKey="-1"
 				headerValue="Selecciona la propiedad"
 				list="propiedades" 
-				name="propiedad" />
+				name="txtPropiedad" />
 			<s:select label="%{getText('label.formulario.alquiler.actividad')}" 
 				headerKey="-1"
 				headerValue="Selecciona la actividad"
 				list="actividades" 
-				name="actividad" />
-			<s:textfield name="fechaInicio" label="%{getText('label.formulario.alquiler.fechaInicio')}"
+				name="txtActividad" />
+			<s:textfield name="txtFechaInicio" label="%{getText('label.formulario.alquiler.fechaInicio')}"
 				value="%{txtFechaInicio}" />
-			<s:textfield name="fechaFin" label="%{getText('label.formulario.alquiler.fechaFin')}"
+			<s:textfield name="txtFechaFin" label="%{getText('label.formulario.alquiler.fechaFin')}"
 				value="%{txtFechaFin}" />
-			<s:textfield name="precio" label="%{getText('label.formulario.alquiler.precio')}"
+			<s:textfield name="txtPrecio" label="%{getText('label.formulario.alquiler.precio')}"
 				value="%{txtPrecio}" />
 			<div class="errorSection">
 				<tr>
@@ -46,7 +45,7 @@
 		</s:form>
 		<div>&nbsp;</div>
 		<s:form action="buscarAlquileres" method="POST">
-          	<s:hidden name="dniCliente" value="%{txtCliente}" />
+          	<s:hidden name="txtCliente" value="%{txtCliente}" />
 		    <s:submit value="%{getText('action.volver')}"/>
 		</s:form>
 	</body>

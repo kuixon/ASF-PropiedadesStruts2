@@ -15,7 +15,7 @@
 		</div>
 		<h2>Identificaci&oacute;n del cliente</h2>
 		<s:form action="buscarAlquileres" method="POST">
-			<s:textfield name="dniCliente" label="%{getText('label.index.cliente')}"/>
+			<s:textfield name="txtCliente" label="%{getText('label.index.cliente')}"/>
 			<div class="errorSection">
 				<tr>
 					<td class="error" colspan="2">

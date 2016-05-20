@@ -23,7 +23,7 @@
 		    <h2>El alquiler con id <s:property value="%{idAlquiler}" /> ha sido editado correctamente</h2>
 		</s:elseif>
 		<s:form action="buscarAlquileres" method="POST">
-          	<s:hidden name="dniCliente" value="%{dniCliente}" />
+          	<s:hidden name="txtCliente" value="%{txtCliente}" />
 		    <s:submit value="%{getText('action.volver')}"/>
 		</s:form>
 	</body>

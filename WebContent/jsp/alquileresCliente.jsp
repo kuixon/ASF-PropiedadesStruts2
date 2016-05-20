@@ -13,7 +13,7 @@
 		<div class="titleDiv">
 			<h1>Centro de llamadas - Propiedades</h1>
 		</div>
-		<h2>Alquileres del cliente con DNI: <s:property value="dniCliente"/></h2>
+		<h2>Alquileres del cliente con DNI: <s:property value="txtCliente"/></h2>
 		<table class="borderAll">
 		    <tr>
 		        <th><s:text name="table.alquileres.propiedad"/></th>
@@ -36,7 +36,7 @@
 		            	<s:form action="formularioAlquiler" method="POST">
 		            		<s:hidden name="accion" value="editar" />
 		            		<s:hidden name="idAlquiler" value="%{idAlquiler}" />
-		            		<s:hidden name="txtCliente" value="%{dniCliente}" />
+		            		<s:hidden name="txtCliente" value="%{txtCliente}" />
 		            		<s:hidden name="txtPropiedad" value="%{propiedad.nombre}" />
 		            		<s:hidden name="txtActividad" value="%{actividad.nombre}"/>
 		            		<s:hidden name="txtFechaInicio" value="%{fecha_inicio}" />
@@ -49,7 +49,7 @@
 		            	<s:form action="eliminarAlquiler" method="POST">
 		            		<s:hidden name="accion" value="eliminar" />
 		            		<s:hidden name="idAlquiler" value="%{idAlquiler}" />
-		            		<s:hidden name="dniCliente" value="%{dniCliente}"/>
+		            		<s:hidden name="txtCliente" value="%{txtCliente}"/>
 						    <s:submit value="%{getText('action.eliminar')}"/>
 						</s:form>
 		            </td>
@@ -61,7 +61,7 @@
 			<s:form action="formularioAlquiler" method="POST">
            		<s:hidden name="accion" value="add" />
            		<s:hidden name="idAlquiler" value="%{idAlquiler}" />
-           		<s:hidden name="txtCliente" value="%{dniCliente}"/>
+           		<s:hidden name="txtCliente" value="%{txtCliente}"/>
 			    <s:submit value="%{getText('action.añadir')}"/>
 			</s:form>
 			<s:form action="/jsp/index.jsp">

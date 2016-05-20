@@ -9,26 +9,26 @@ import utilities.ClientManager;
 
 public class BuscarAlquileres extends ActionSupport {
 	
-	private String dniCliente = null;
+	private String txtCliente = null;
 	private ArrayList<CustomAlquiler> listaAlquileres = null;
 	
 	public String execute() throws Exception {
-		if (getDniCliente() == null || getDniCliente().equals("")) {
+		if (getTxtCliente() == null || getTxtCliente().equals("")) {
 			addActionError(getText("errors.requerido.dniCliente"));
 			return INPUT;
-		} else if (!dniValidation(getDniCliente())) {
+		} else if (!dniValidation(getTxtCliente())) {
 			addActionError(getText("errors.formato.incorrecto.dniCliente"));
             return ERROR;
 		} else {
 			ArrayList<CustomCliente> clientes = ClientManager.getInstance().getAllClientes();
 			boolean enc = false;
 			for (CustomCliente cc : clientes) {
-				if (cc.getDni() == Integer.parseInt(getDniCliente())) {
+				if (cc.getDni() == Integer.parseInt(getTxtCliente())) {
 					enc = true;
 				}
 			}
 			if (enc) {
-				setListaAlquileres(ClientManager.getInstance().getAlquileresByDniCliente(Integer.parseInt(getDniCliente())));
+				setListaAlquileres(ClientManager.getInstance().getAlquileresByDniCliente(Integer.parseInt(getTxtCliente())));
 				return SUCCESS;
 			} else {
 				addActionError(getText("errors.inexistente.dniCliente"));
@@ -37,12 +37,12 @@ public class BuscarAlquileres extends ActionSupport {
 		}
 	}
 
-	public String getDniCliente() {
-		return dniCliente;
+	public String getTxtCliente() {
+		return txtCliente;
 	}
 
-	public void setDniCliente(String dniCliente) {
-		this.dniCliente = dniCliente;
+	public void setTxtCliente(String txtCliente) {
+		this.txtCliente = txtCliente;
 	}
 
 	public ArrayList<CustomAlquiler> getListaAlquileres() {

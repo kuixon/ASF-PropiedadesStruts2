@@ -5,7 +5,7 @@ import utilities.ClientManager;
 
 public class EliminarAlquiler extends ActionSupport {
 	
-	private String dniCliente = null;
+	private String txtCliente = null;
 	private String idAlquiler = null;
 	private String accion = null;
 	
@@ -13,13 +13,13 @@ public class EliminarAlquiler extends ActionSupport {
 		ClientManager.getInstance().deleteAlquiler(Integer.parseInt(getIdAlquiler()));
 		return SUCCESS;
 	}
-
-	public String getDniCliente() {
-		return dniCliente;
+	
+	public String getTxtCliente() {
+		return txtCliente;
 	}
 
-	public void setDniCliente(String dniCliente) {
-		this.dniCliente = dniCliente;
+	public void setTxtCliente(String txtCliente) {
+		this.txtCliente = txtCliente;
 	}
 
 	public String getIdAlquiler() {

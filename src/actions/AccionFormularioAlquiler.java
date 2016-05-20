@@ -16,14 +16,17 @@ public class AccionFormularioAlquiler extends ActionSupport  {
 	
 	// Variables del formulario
 	private String idAlquiler = null;
-	private String dniCliente = null;
-	private String propiedad = null;
-	private String actividad = null;
-	private String fechaInicio = null;
-	private String fechaFin = null;
-	private String precio = null;
+	private String txtCliente = "";
+	private String txtPropiedad = "";
+	private String txtActividad = "";
+	private String txtFechaInicio = "";
+	private String txtFechaFin = "";
+	private String txtPrecio = "";
 	
 	private String accion = null;
+	
+	private ArrayList<String> propiedades = null;
+	private ArrayList<String> actividades = null;
 	
 	private CustomCliente cc = null;
 	private CustomPropiedad cp = null;
@@ -31,41 +34,56 @@ public class AccionFormularioAlquiler extends ActionSupport  {
 	
 	public String execute() throws Exception {
 		
-		if (getDniCliente() != null && getPropiedad() != null && getActividad() != null
-				&& getFechaInicio() != null && getFechaFin() != null && getPrecio() != null) {
+		// Inicialización propiedades y actividades
+		propiedades = new ArrayList<String>();
+		for (CustomPropiedad cp : ClientManager.getInstance().getAllPropiedades()) {
+			propiedades.add(cp.getNombre());
+		}
+		
+		actividades = new ArrayList<String>();
+		for (CustomActividad ca : ClientManager.getInstance().getAllActividades()) {
+			actividades.add(ca.getNombre());
+		}
+		
+		if (!getTxtCliente().equals("") && !getTxtPropiedad().equals("") && !getTxtActividad().equals("")
+				&& !getTxtFechaInicio().equals("") && !getTxtFechaFin().equals("") && !getTxtPrecio().equals("")) {
 			
-			if (isDateFormat(getFechaInicio()) != null && 
-					isDateFormat(getFechaFin()) != null) {
-				
-				// Inicialización
-				setCc(ClientManager.getInstance().getClienteById(Integer.parseInt(getDniCliente()))); 
-				for (CustomPropiedad customPropiedad : ClientManager.getInstance().getAllPropiedades()) {
-					if (customPropiedad.getNombre().equals(getPropiedad())) {
-						setCp(customPropiedad);
+			if (isDateFormat(getTxtFechaInicio()) != null && 
+					isDateFormat(getTxtFechaFin()) != null) {
+				if (isNumber(getTxtPrecio())) {
+					// Inicialización
+					setCc(ClientManager.getInstance().getClienteById(Integer.parseInt(getTxtCliente()))); 
+					for (CustomPropiedad customPropiedad : ClientManager.getInstance().getAllPropiedades()) {
+						if (customPropiedad.getNombre().equals(getTxtPropiedad())) {
+							setCp(customPropiedad);
+						}
 					}
-				}
-				for (CustomActividad customActividad : ClientManager.getInstance().getAllActividades()) {
-					if (customActividad.getNombre().equals(getActividad())) {
-						setCa(customActividad);
+					for (CustomActividad customActividad : ClientManager.getInstance().getAllActividades()) {
+						if (customActividad.getNombre().equals(getTxtActividad())) {
+							setCa(customActividad);
+						}
 					}
-				}
-				
-				CustomAlquiler customAlquiler = new CustomAlquiler();
-				customAlquiler.setCliente(getCc());
-				customAlquiler.setPropiedad(getCp());
-				customAlquiler.setActividad(getCa());
-				customAlquiler.setFecha_inicio(isDateFormat(getFechaInicio()));
-				customAlquiler.setFecha_fin(isDateFormat(getFechaFin()));
-				customAlquiler.setPrecio(Double.parseDouble(getPrecio()));
-				if (getAccion().equals("add")) {
-					ClientManager.getInstance().saveAlquiler(customAlquiler);
+					
+					CustomAlquiler customAlquiler = new CustomAlquiler();
+					customAlquiler.setCliente(getCc());
+					customAlquiler.setPropiedad(getCp());
+					customAlquiler.setActividad(getCa());
+					customAlquiler.setFecha_inicio(isDateFormat(getTxtFechaInicio()));
+					customAlquiler.setFecha_fin(isDateFormat(getTxtFechaFin()));
+					customAlquiler.setPrecio(Double.parseDouble(getTxtPrecio()));
+					if (getAccion().equals("add")) {
+						ClientManager.getInstance().saveAlquiler(customAlquiler);
+					} else {
+						customAlquiler.setIdAlquiler(Integer.parseInt(getIdAlquiler()));
+						ClientManager.getInstance().editAlquiler(customAlquiler);
+					}
+					return SUCCESS;
 				} else {
-					customAlquiler.setIdAlquiler(Integer.parseInt(getIdAlquiler()));
-					ClientManager.getInstance().editAlquiler(customAlquiler);
+					addActionError(getText("errors.formulario.alquiler.formatoPrecio"));
+		            return ERROR;
 				}
-				return SUCCESS;
 			} else {
-				addActionError(getText("errors.formulario.alquiler.requeridos"));
+				addActionError(getText("errors.formulario.alquiler.formatoFechas"));
 	            return ERROR;
 			}
 		} else {
@@ -82,52 +100,52 @@ public class AccionFormularioAlquiler extends ActionSupport  {
 		this.idAlquiler = idAlquiler;
 	}
 
-	public String getDniCliente() {
-		return dniCliente;
+	public String getTxtCliente() {
+		return txtCliente;
 	}
 
-	public void setDniCliente(String dniCliente) {
-		this.dniCliente = dniCliente;
+	public void setTxtCliente(String txtCliente) {
+		this.txtCliente = txtCliente;
 	}
 
-	public String getPropiedad() {
-		return propiedad;
+	public String getTxtPropiedad() {
+		return txtPropiedad;
 	}
 
-	public void setPropiedad(String propiedad) {
-		this.propiedad = propiedad;
+	public void setTxtPropiedad(String txtPropiedad) {
+		this.txtPropiedad = txtPropiedad;
 	}
 
-	public String getActividad() {
-		return actividad;
+	public String getTxtActividad() {
+		return txtActividad;
 	}
 
-	public void setActividad(String actividad) {
-		this.actividad = actividad;
+	public void setTxtActividad(String txtActividad) {
+		this.txtActividad = txtActividad;
 	}
 
-	public String getFechaInicio() {
-		return fechaInicio;
+	public String getTxtFechaInicio() {
+		return txtFechaInicio;
 	}
 
-	public void setFechaInicio(String fechaInicio) {
-		this.fechaInicio = fechaInicio;
+	public void setTxtFechaInicio(String txtFechaInicio) {
+		this.txtFechaInicio = txtFechaInicio;
 	}
 
-	public String getFechaFin() {
-		return fechaFin;
+	public String getTxtFechaFin() {
+		return txtFechaFin;
 	}
 
-	public void setFechaFin(String fechaFin) {
-		this.fechaFin = fechaFin;
+	public void setTxtFechaFin(String txtFechaFin) {
+		this.txtFechaFin = txtFechaFin;
 	}
 
-	public String getPrecio() {
-		return precio;
+	public String getTxtPrecio() {
+		return txtPrecio;
 	}
 
-	public void setPrecio(String precio) {
-		this.precio = precio;
+	public void setTxtPrecio(String txtPrecio) {
+		this.txtPrecio = txtPrecio;
 	}
 
 	public String getAccion() {
@@ -136,6 +154,22 @@ public class AccionFormularioAlquiler extends ActionSupport  {
 
 	public void setAccion(String accion) {
 		this.accion = accion;
+	}
+
+	public ArrayList<String> getPropiedades() {
+		return propiedades;
+	}
+
+	public void setPropiedades(ArrayList<String> propiedades) {
+		this.propiedades = propiedades;
+	}
+
+	public ArrayList<String> getActividades() {
+		return actividades;
+	}
+
+	public void setActividades(ArrayList<String> actividades) {
+		this.actividades = actividades;
 	}
 
 	public CustomCliente getCc() {
@@ -160,6 +194,15 @@ public class AccionFormularioAlquiler extends ActionSupport  {
 
 	public void setCa(CustomActividad ca) {
 		this.ca = ca;
+	}
+
+	private boolean isNumber(String number) {
+		try {
+			Integer.parseInt(number);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 	
 	private Date isDateFormat(String date) {
