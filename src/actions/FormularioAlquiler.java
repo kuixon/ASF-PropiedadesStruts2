@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import entities.CustomCliente;
+import entities.CustomActividad;
+import entities.CustomPropiedad;
 import utilities.ClientManager;
 
 public class FormularioAlquiler extends ActionSupport {
 	
 	// Variables del formulario
+	private String idAlquiler = null;
 	private String txtCliente = "";
 	private String txtPropiedad = "";
 	private String txtActividad = "";
@@ -17,34 +19,33 @@ public class FormularioAlquiler extends ActionSupport {
 	private String txtFechaFin = "";
 	private String txtPrecio = "";
 	
-	/*
+	private String accion = null;
+	
+	private ArrayList<String> propiedades = null;
+	private ArrayList<String> actividades = null;
+	
 	public String execute() throws Exception {
-		if (getDniCliente() == null || getDniCliente().equals("")) {
-			addActionError(getText("errors.requerido.dniCliente"));
-			return INPUT;
-		} else if (!dniValidation(getDniCliente())) {
-			addActionError(getText("errors.formato.incorrecto.dniCliente"));
-            return ERROR;
-		} else {
-			ArrayList<CustomCliente> clientes = ClientManager.getInstance().getAllClientes();
-			boolean enc = false;
-			for (CustomCliente cc : clientes) {
-				if (cc.getDni() == Integer.parseInt(getDniCliente())) {
-					enc = true;
-				}
-			}
-			if (enc) {
-				setListaAlquileres(ClientManager.getInstance().getAlquileresByDniCliente(Integer.parseInt(getDniCliente())));
-				return SUCCESS;
-			} else {
-				addActionError(getText("errors.inexistente.dniCliente"));
-	            return ERROR;
-			}
+		propiedades = new ArrayList<String>();
+		for (CustomPropiedad cp : ClientManager.getInstance().getAllPropiedades()) {
+			propiedades.add(cp.getNombre());
 		}
 		
+		actividades = new ArrayList<String>();
+		for (CustomActividad ca : ClientManager.getInstance().getAllActividades()) {
+			actividades.add(ca.getNombre());
+		}
+		
+		return SUCCESS;
 	}
-	*/
 	
+	public String getIdAlquiler() {
+		return idAlquiler;
+	}
+
+	public void setIdAlquiler(String idAlquiler) {
+		this.idAlquiler = idAlquiler;
+	}
+
 	public String getTxtCliente() {
 		return txtCliente;
 	}
@@ -91,5 +92,29 @@ public class FormularioAlquiler extends ActionSupport {
 	
 	public void setTxtPrecio(String txtPrecio) {
 		this.txtPrecio = txtPrecio;
+	}
+
+	public ArrayList<String> getPropiedades() {
+		return propiedades;
+	}
+
+	public void setPropiedades(ArrayList<String> propiedades) {
+		this.propiedades = propiedades;
+	}
+
+	public String getAccion() {
+		return accion;
+	}
+
+	public void setAccion(String accion) {
+		this.accion = accion;
+	}
+
+	public ArrayList<String> getActividades() {
+		return actividades;
+	}
+
+	public void setActividades(ArrayList<String> actividades) {
+		this.actividades = actividades;
 	}
 }

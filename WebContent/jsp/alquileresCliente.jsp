@@ -34,8 +34,10 @@
 		            <td class="nowrap"><s:property value="precio"/></td>
 		            <td class="nowrap">
 		            	<s:form action="formularioAlquiler" method="POST">
+		            		<s:hidden name="accion" value="editar" />
+		            		<s:hidden name="idAlquiler" value="%{idAlquiler}" />
 		            		<s:hidden name="txtCliente" value="%{dniCliente}" />
-		            		<s:hidden name="txtPropiedad" value="&{propiedad.nombre}" />
+		            		<s:hidden name="txtPropiedad" value="%{propiedad.nombre}" />
 		            		<s:hidden name="txtActividad" value="%{actividad.nombre}"/>
 		            		<s:hidden name="txtFechaInicio" value="%{fecha_inicio}" />
 		            		<s:hidden name="txtFechaFin" value="%{fecha_inicio}" />
@@ -45,7 +47,8 @@
 		            </td>
 		            <td class="nowrap">
 		            	<s:form action="eliminarAlquiler" method="POST">
-		            		<s:hidden name="idAlquiler" value="%{idAlquiler}"/>
+		            		<s:hidden name="accion" value="eliminar" />
+		            		<s:hidden name="idAlquiler" value="%{idAlquiler}" />
 		            		<s:hidden name="dniCliente" value="%{dniCliente}"/>
 						    <s:submit value="%{getText('action.eliminar')}"/>
 						</s:form>
@@ -56,7 +59,9 @@
 		<div>&nbsp;</div>
 		<div>
 			<s:form action="formularioAlquiler" method="POST">
-           		<s:hidden name="dniCliente" value="%{dniCliente}"/>
+           		<s:hidden name="accion" value="add" />
+           		<s:hidden name="idAlquiler" value="%{idAlquiler}" />
+           		<s:hidden name="txtCliente" value="%{dniCliente}"/>
 			    <s:submit value="%{getText('action.añadir')}"/>
 			</s:form>
 			<s:form action="/jsp/index.jsp">

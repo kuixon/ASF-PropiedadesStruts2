@@ -7,6 +7,7 @@ public class EliminarAlquiler extends ActionSupport {
 	
 	private String dniCliente = null;
 	private String idAlquiler = null;
+	private String accion = null;
 	
 	public String execute() throws Exception {
 		ClientManager.getInstance().deleteAlquiler(Integer.parseInt(getIdAlquiler()));
@@ -27,5 +28,13 @@ public class EliminarAlquiler extends ActionSupport {
 
 	public void setIdAlquiler(String idAlquiler) {
 		this.idAlquiler = idAlquiler;
+	}
+
+	public String getAccion() {
+		return accion;
+	}
+
+	public void setAccion(String accion) {
+		this.accion = accion;
 	}
 }

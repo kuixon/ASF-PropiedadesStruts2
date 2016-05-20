@@ -16,10 +16,14 @@
 			<result>/jsp/alquileresCliente.jsp</result>
         </action>
         <action name="eliminarAlquiler" class="actions.EliminarAlquiler">
-			<result>/jsp/alquilerEliminado.jsp</result>
+			<result>/jsp/resultadoAccionAlquiler.jsp</result>
         </action>
         <action name="formularioAlquiler" class="actions.FormularioAlquiler">
-			<result>/jsp/index.jsp</result>
+			<result>/jsp/formularioAlquiler.jsp</result>
+        </action>
+        <action name="accionFormularioAlquiler" class="actions.AccionFormularioAlquiler">
+			<result  name="error">/jsp/formularioAlquiler.jsp</result>
+			<result>/jsp/resultadoAccionAlquiler.jsp</result>
         </action>
         
     </package>

@@ -13,7 +13,15 @@
 		<div class="titleDiv">
 			<h1>Centro de llamadas - Propiedades</h1>
 		</div>
-		<h2>El alquiler con id <s:property value="idAlquiler" /> ha sido eliminado correctamente</h2>
+		<s:if test="accion == \"add\"">
+			<h2>El alquiler ha sido añadido correctamente</h2>
+		</s:if>
+		<s:elseif test="accion == \"eliminar\"">
+		    <h2>El alquiler con id <s:property value="%{idAlquiler}" /> ha sido eliminado correctamente</h2>
+		</s:elseif>
+		<s:elseif test="accion == \"editar\"">
+		    <h2>El alquiler con id <s:property value="%{idAlquiler}" /> ha sido editado correctamente</h2>
+		</s:elseif>
 		<s:form action="buscarAlquileres" method="POST">
           	<s:hidden name="dniCliente" value="%{dniCliente}" />
 		    <s:submit value="%{getText('action.volver')}"/>
